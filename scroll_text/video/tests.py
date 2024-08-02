@@ -1,8 +1,14 @@
+import os
 import shutil
 import tempfile
 
+from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import TestCase, override_settings
+from django.test import TestCase
+from django.test import override_settings
+from django.urls import reverse
+from rest_framework import status
+from rest_framework.test import APIClient
 
 from .models import ScrollingTextVideo
 
@@ -35,3 +41,32 @@ class ScrollingTextVideoModelTest(TestCase):
 
     def test_string_representation(self):
         self.assertEqual(str(self.scrolling_text_video), self.text[:50])
+
+
+class ScrollingTextVideoCreateDownloadViewTest(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.url = reverse('scroll_text')
+
+    def test_missing_text_parameter(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_video_creation_and_download(self):
+        text = "тестовый текст"
+        response = self.client.get(self.url, {'text': text})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        content_disposition = response.get('Content-Disposition')
+        self.assertIn('attachment', content_disposition)
+        self.assertIn('.mp4', content_disposition)
+
+        self.assertTrue(ScrollingTextVideo.objects.filter(text=text).exists())
+        video_record = ScrollingTextVideo.objects.get(text=text)
+        self.assertTrue(os.path.exists(
+            os.path.join(settings.MEDIA_ROOT, video_record.video_file.name)))
+
+    def tearDown(self):
+        for video in ScrollingTextVideo.objects.all():
+            video.video_file.delete()
+        ScrollingTextVideo.objects.all().delete()
