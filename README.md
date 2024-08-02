@@ -51,6 +51,12 @@ After the containers are up and running, the application should be accessible at
 http://127.0.0.1/
 ```
 
+## Google Colab
+
+You can access the Google Colab notebook for this project by clicking the button below:
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]([https://colab.research.google.com/drive/YOUR_GOOGLE_COLAB_LINK_HERE](https://colab.research.google.com/drive/1bwDdPlnsFd3eSwf0RFTjPGHktJVLquyR?usp=sharing))
+
 ## Environment Variables
 
 The following environment variables are used in the project. Make sure to set them accordingly in your `.env` file or in the Docker Compose file:
