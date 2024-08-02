@@ -55,7 +55,7 @@ http://127.0.0.1/
 
 You can access the Google Colab notebook for this project by clicking the button below:
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]((https://colab.research.google.com/drive/1bwDdPlnsFd3eSwf0RFTjPGHktJVLquyR?usp=sharing))
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1bwDdPlnsFd3eSwf0RFTjPGHktJVLquyR?usp=sharing)
 
 ## Environment Variables
 
