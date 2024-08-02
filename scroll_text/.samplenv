@@ -1,0 +1,9 @@
+SECRET_KEY='yourkey'
+DJANGO_SETTINGS_MODULE='scroll_text.settings'
+DEBUG=False
+ALLOWED_HOSTS='*'
+POSTGRES_USER=amin
+POSTGRES_PASSWORD=my_super_password
+POSTGRES_DB=django_db
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
